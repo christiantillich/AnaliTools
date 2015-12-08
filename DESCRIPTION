@@ -11,6 +11,7 @@ Depends:
   ,dplyr
   ,berdie
   ,magrittr
+  ,Rcpp
 Suggests:
 Description: My own personal toolbox. Use at your own discretion.
 License: GPL (>= 2)

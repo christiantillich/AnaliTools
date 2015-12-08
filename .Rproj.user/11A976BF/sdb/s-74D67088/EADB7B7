@@ -1,13 +1,13 @@
 {
-    "contents" : "Package: AnaliTools\nVersion: 0.5-1\nDate: 2015-12-08\nTitle: Simple toolbox of data analysis functions\nAuthors@R: person(\"Christian\", \"Tillich\", role = c(\"aut\", \"cre\"),\n\t\t     email = \"christian.tillich.walker@gmail.com\")\nDepends:\n   ggthemes\n  ,ggplot2\n  ,plyr\n  ,dplyr\n  ,berdie\n  ,magrittr\nSuggests:\nDescription: My own personal toolbox. Use at your own discretion.\nLicense: GPL (>= 2)\nRoxygenNote: 5.0.1\n",
+    "contents" : "Package: AnaliTools\nVersion: 0.5-1\nDate: 2015-12-08\nTitle: Simple toolbox of data analysis functions\nAuthors@R: person(\"Christian\", \"Tillich\", role = c(\"aut\", \"cre\"),\n\t\t     email = \"christian.tillich.walker@gmail.com\")\nDepends:\n   ggthemes\n  ,ggplot2\n  ,plyr\n  ,dplyr\n  ,berdie\n  ,magrittr\n  ,Rcpp\nSuggests:\nDescription: My own personal toolbox. Use at your own discretion.\nLicense: GPL (>= 2)\nRoxygenNote: 5.0.1\n",
     "created" : 1449602784008.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "787895965",
+    "hash" : "2843359572",
     "id" : "EADB7B7",
-    "lastKnownWriteTime" : 1449603961,
-    "path" : "~/AnaliTools/DESCRIPTION",
+    "lastKnownWriteTime" : 1449604680,
+    "path" : "C:/GitRepos/AnaliTools/DESCRIPTION",
     "project_path" : "DESCRIPTION",
     "properties" : {
     },
