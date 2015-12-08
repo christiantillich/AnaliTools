@@ -1,0 +1,17 @@
+{
+    "contents" : "\n\nas.flgs <- function(df,x){\n  #' This function converts a single column into a matrix of binary\n  #' flags, one for each unique value the column can take. The columns\n  #' can then be readily joined with the original data frame using cbind.\n  #' Be careful with this function at present, as you can easily flood \n  #' memory by choosing columns with large numbers of unique values.   \n  \n  #If any of the columns are not already factors, make them factors\n  df <- sapply(df, as.factor)\n  \n  #Convert the chosen factor column into a matrix of binary flags.\n  M <- as.data.frame(model.matrix(~df[,x] - 1))\n  names(M) <- gsub('df\\\\[, x\\\\]',paste(x,\"_\",sep=\"\"), names(M))\n  \n  #Pick the column with the greatest sum. Drop it. This is your reference.\n  N <- names(colSums(M)[order(colSums(M), decreasing=T)[1]])\n  M[,N] <- NULL\n  \n  return(M)\n}\n\nflg.create <- function(df, name.list){\n  #' This function is a wrapper for as.flgs, to apply it to a named list\n  #' of columns in a target data frame. This allows you to do batch the\n  #' flag conversion of factor variables. As above, be careful with this\n  #' function, as it's easy to flood memory by batching more than one\n  #' column with large numbers of unique entries. \n  \n  #Apply as.flgs to every column name in name.list\n  flgs <- lapply(name.list, function(x) as.flgs(df,x))\n  \n  #flgs returns as a list. Unlist it and force to data frame with names. \n  d <- as.data.frame(unlist(flgs, recursive=F))\n  names(d) <- gsub('.+\\\\.',\"\", names(d))\n  \n  #In the original data set, del every column in the named list. \n  df <- df[del(df, name.list)]\n  \n  #Append the new logical columns to the original data set. \n  df <- cbind(df, d)\n  \n  #Return the modified data set. \n  return(df)\n}",
+    "created" : 1449601311106.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2620555217",
+    "id" : "6FDAD2B8",
+    "lastKnownWriteTime" : 1449601236,
+    "path" : "~/AnaliTools/R/cat.conversions.R",
+    "project_path" : "R/cat.conversions.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
