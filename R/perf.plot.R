@@ -1,5 +1,6 @@
 require(plyr)
 require(dplyr)
+require(Rcpp)
 require(ggplot2)
 
 

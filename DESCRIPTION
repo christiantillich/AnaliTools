@@ -4,15 +4,14 @@ Date: 2015-12-08
 Title: Simple toolbox of data analysis functions
 Authors@R: person("Christian", "Tillich", role = c("aut", "cre"),
 		     email = "christian.tillich.walker@gmail.com")
-Depends:
-   ggthemes
-  ,Rcpp
+Imports:
+   DBI
   ,ggplot2
+  ,ggthemes
   ,plyr
   ,dplyr
   ,berdie
   ,magrittr
-
 Suggests:
 Description: My own personal toolbox. Use at your own discretion.
 License: GPL (>= 2)
