@@ -2,11 +2,22 @@
 % Please edit documentation in R/data.tools.R
 \name{keep}
 \alias{keep}
-\title{Keep only named columns from df.}
+\title{keep}
 \usage{
 keep(df, c)
 }
+\arguments{
+\item{df}{- A data frame}
+
+\item{c}{- A vector of column names.}
+}
+\value{
+Basically df %>% select()
+}
 \description{
-Keep only named columns from df.
+- Keep only named columns from df. SAS-like keep function.
+}
+\examples{
+keep(iris, 'Sepal.Length')
 }
 

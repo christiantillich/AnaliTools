@@ -2,19 +2,22 @@
 % Please edit documentation in R/cat.conversions.R
 \name{flg.create}
 \alias{flg.create}
-\title{This function is a wrapper for as.flgs, to apply it to a named list
-of columns in a target data frame. This allows you to do batch the
-flag conversion of factor variables. As above, be careful with this
-function, as it's easy to flood memory by batching more than one
-column with large numbers of unique entries.}
+\title{flg.create}
 \usage{
 flg.create(df, name.list)
 }
+\arguments{
+\item{df}{- A data frame
+name.list - A list of the columns to be transformed.}
+}
 \description{
-This function is a wrapper for as.flgs, to apply it to a named list
-of columns in a target data frame. This allows you to do batch the
-flag conversion of factor variables. As above, be careful with this
-function, as it's easy to flood memory by batching more than one
-column with large numbers of unique entries.
+This function takes in a named list and returns a data frame
+containing the binary transformation of each of the named variables.
+This allows you to do batch the flag conversion of all factor variables in
+a data set. Be careful with this function, as it's easy to flood memory by
+batching more than one column with large numbers of unique entries.
+}
+\examples{
+head(flg.create(iris, list("Species")))
 }
 

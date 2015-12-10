@@ -2,11 +2,22 @@
 % Please edit documentation in R/data.tools.R
 \name{del}
 \alias{del}
-\title{Remove named columns from df}
+\title{del}
 \usage{
 del(df, c)
 }
+\arguments{
+\item{df}{- A data frame}
+
+\item{c}{- A vector of column names.}
+}
+\value{
+A data frame with the named columns removed.
+}
 \description{
-Remove named columns from df
+Remove named columns from df. SAS-like delete function.
+}
+\examples{
+keep(iris, 'Sepal.Length')
 }
 

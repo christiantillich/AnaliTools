@@ -4,7 +4,18 @@ require(Rcpp)
 require(ggplot2)
 
 
-
+#' .buckets
+#' @description - Does the automatic bucketing for the plot. Really just
+#' cribbing on hist$breaks to do the heavy work, but with some better handling
+#' of categorical variables. Also includes a switch to treat anything numeric
+#' as categorical instead.
+#' @param x - A vector to be bucketed.
+#' @param num.switch - Binary. True if we should treat x as numeric, false if
+#' categorical.
+#' @return Returns a list object with 2 values. $groups is a vector containing
+#' the distinct bucket values. $buckets returns the snapped values.
+#' @examples .buckets(iris[,1], F)
+#' .buckets(iris[,2])
 .buckets <- function(x,
   num.switch = class(x) %in% c("numeric", "integer", "float")
  )
@@ -51,7 +62,25 @@ require(ggplot2)
 
 
 
-
+#' perf.plot
+#' @description Creates my most common univariate plot - the target variable
+#' averaged at different levels of x and superimposed over a histogram showing
+#' the population distribution across the different values of x. The returned
+#' plot is a ggplot2 object.
+#' @param y - The target variable
+#' @param x - The independent variable.
+#' @param xlab - x-axis label, straight from qplot.
+#' @param ylab - y-axis label, straight from qplot.
+#' @param main - Main title, straight from qplot.
+#' @param num.switch - Binary. True if we should treat x as numeric, false if
+#' categorical.
+#' @param col - Color of the univariate line, straight from qplot.
+#' @param lwd - Histogram width control. Should default to something sensible.
+#' @examples perf.plot(as.integer(iris$Species == "virginica"),iris[,1])
+#' perf.plot(as.integer(iris$Species == "virginica"),iris[,2])
+#' perf.plot(as.integer(iris$Species == "virginica"),iris[,3])
+#' perf.plot(as.integer(iris$Species == "virginica"),iris[,1], num.switch=F)
+#' perf.plot(as.integer(iris$Species == "virginica"),iris[,3], num.switch=F)
 perf.plot <- function(y, x
   ,xlab = deparse(substitute(x))
   ,ylab = deparse(substitute(y))

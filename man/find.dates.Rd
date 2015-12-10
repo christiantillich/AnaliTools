@@ -2,17 +2,25 @@
 % Please edit documentation in R/sql.tools.R
 \name{find.dates}
 \alias{find.dates}
-\title{Will parse query text and returns base on return.place. If true
-function returns a vector of the available dates in a query. If 
-false, returns a vector of the logical position of dates in the
-vector created by query.split.}
+\title{find.dates}
 \usage{
 find.dates(q, return.place = F)
 }
+\arguments{
+\item{q}{- query as a single character string}
+
+\item{return.place}{- switch for showing date values, or date locations}
+}
+\value{
+If return.place = F, function returns a string of booleans, one
+for each word in the query, where T indicates that the string is coded as
+a date. If return.place = T, the function returns a vector of each date
+string coded into the query.
+}
 \description{
 Will parse query text and returns base on return.place. If true
-function returns a vector of the available dates in a query. If 
-false, returns a vector of the logical position of dates in the
-vector created by query.split.
+function returns a vector of the available dates in a query. If false,
+returns a vector of the logical position of dates in the vector created by
+query.split.
 }
 

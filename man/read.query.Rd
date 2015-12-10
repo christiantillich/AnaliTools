@@ -2,17 +2,19 @@
 % Please edit documentation in R/sql.tools.R
 \name{read.query}
 \alias{read.query}
-\title{#A wrapper for read_query, with some additional workarounds for 
-the way Windows handles text files. 
-TODO: This function collapses queries in a way that's harmful to
-comments made via --.}
+\title{read.query}
 \usage{
 read.query(x)
 }
+\arguments{
+\item{x}{- query as a character string}
+}
+\value{
+Returns the modified character string with odd line-ending characters
+removed.
+}
 \description{
-#A wrapper for read_query, with some additional workarounds for 
-the way Windows handles text files. 
-TODO: This function collapses queries in a way that's harmful to
-comments made via --.
+A wrapper for read_query, with some additional workarounds for
+the way Windows handles text files.
 }
 

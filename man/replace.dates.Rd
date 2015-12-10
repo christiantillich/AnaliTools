@@ -2,15 +2,22 @@
 % Please edit documentation in R/sql.tools.R
 \name{replace.dates}
 \alias{replace.dates}
-\title{Replaces query dates with a vector of dates specified by the user.
-Function will error if length(dates) is not the same as dates found
-by find.dates}
+\title{replace.dates}
 \usage{
 replace.dates(q, dates)
 }
+\arguments{
+\item{q}{- query as a single character string}
+
+\item{dates}{- a vector of dates to replace in the query. Function will error
+if length(dates) != length(find.dates(q,T))}
+}
+\value{
+Function returns the original query text, but with the new dates.
+}
 \description{
-Replaces query dates with a vector of dates specified by the user.
-Function will error if length(dates) is not the same as dates found
-by find.dates
+Replaces query dates with a vector of dates specified by the
+user. Function will error if length(dates) is not the same as dates found by
+find.dates.
 }
 

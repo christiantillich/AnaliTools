@@ -2,19 +2,25 @@
 % Please edit documentation in R/cat.conversions.R
 \name{as.flgs}
 \alias{as.flgs}
-\title{This function converts a single column into a matrix of binary
-flags, one for each unique value the column can take. The columns
-can then be readily joined with the original data frame using cbind.
-Be careful with this function at present, as you can easily flood 
-memory by choosing columns with large numbers of unique values.}
+\title{as.flgs}
 \usage{
 as.flgs(df, x)
 }
+\arguments{
+\item{df}{- a data frame
+x - a single column name or number}
+}
+\value{
+Returns a new data frame with c - 1 binary columns representing the
+removed column, where c is the number of unique values. The modal value is
+removed altogether, and used as the reference value. This function is the
+base for flg.create, and thus it's not exported.
+}
 \description{
 This function converts a single column into a matrix of binary
-flags, one for each unique value the column can take. The columns
-can then be readily joined with the original data frame using cbind.
-Be careful with this function at present, as you can easily flood 
-memory by choosing columns with large numbers of unique values.
+flags, one for each unique value the column can take. The columns can then
+be readily joined with the original data frame using cbind. Be careful with
+this function at present, as you can easily flood memory by choosing
+columns with large numbers of unique values.
 }
 

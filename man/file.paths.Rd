@@ -2,13 +2,19 @@
 % Please edit documentation in R/sql.tools.R
 \name{file.paths}
 \alias{file.paths}
-\title{These two will enumerate the .csv files in a path, as well as load them
-into a data frame.}
+\title{file.paths}
 \usage{
 file.paths(x)
 }
+\arguments{
+\item{x}{- a single path, expressed as a character string}
+}
+\value{
+Function returns a vector of the global paths for each file found
+in x.
+}
 \description{
-These two will enumerate the .csv files in a path, as well as load them
-into a data frame.
+Takes an input file path and returns the full system path
+for each file found at the input path.
 }
 
