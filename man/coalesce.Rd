@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.tools.R
 \name{\%||\%}
 \alias{\%||\%}
-\title{Coalesce}
+\title{%||%}
 \usage{
 x \%||\% y
 }

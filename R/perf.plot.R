@@ -1,7 +1,8 @@
-require(plyr)
-require(dplyr)
-require(Rcpp)
-require(ggplot2)
+library(plyr)
+library(dplyr)
+library(Rcpp)
+library(ggplot2)
+library(magrittr)
 
 
 #' .buckets
@@ -16,7 +17,8 @@ require(ggplot2)
 #' the distinct bucket values. $buckets returns the snapped values.
 #' @examples .buckets(iris[,1], F)
 #' .buckets(iris[,2])
-.buckets <- function(x,
+.buckets <- function(
+  x,
   num.switch = class(x) %in% c("numeric", "integer", "float")
  )
  {
@@ -76,6 +78,9 @@ require(ggplot2)
 #' categorical.
 #' @param col - Color of the univariate line, straight from qplot.
 #' @param lwd - Histogram width control. Should default to something sensible.
+#' @return Returns a ggplot object with the mean value of y plotted over x,
+#' and a histogram overlayed in the background.
+#' @export
 #' @examples perf.plot(as.integer(iris$Species == "virginica"),iris[,1])
 #' perf.plot(as.integer(iris$Species == "virginica"),iris[,2])
 #' perf.plot(as.integer(iris$Species == "virginica"),iris[,3])

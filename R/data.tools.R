@@ -30,9 +30,11 @@ del <- function(df, c) colnames(df[!colnames(df) %in% c])
 
 
 
-#' Coalesce
+#' %||%
+#' @name %||%
 #' @description DataSci's coalesce function. Gives postgres-like coalesce
 #' @return equivalent to postgres coalesce(x,y)
+#' @rdname coalesce
 #' @export
 #' @examples
 `%||%` <- function(x, y) if (is.null(x)) y else x

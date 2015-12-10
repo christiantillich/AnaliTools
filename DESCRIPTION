@@ -8,10 +8,10 @@ Imports:
    DBI
   ,ggplot2
   ,ggthemes
+  ,magrittr
   ,plyr
   ,dplyr
   ,berdie
-  ,magrittr
 Suggests:
 Description: My own personal toolbox. Use at your own discretion.
 License: GPL (>= 2)

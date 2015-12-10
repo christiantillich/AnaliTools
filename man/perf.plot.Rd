@@ -27,6 +27,10 @@ categorical.}
 
 \item{lwd}{- Histogram width control. Should default to something sensible.}
 }
+\value{
+Returns a ggplot object with the mean value of y plotted over x,
+and a histogram overlayed in the background.
+}
 \description{
 Creates my most common univariate plot - the target variable
 averaged at different levels of x and superimposed over a histogram showing
