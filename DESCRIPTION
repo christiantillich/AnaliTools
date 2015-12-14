@@ -4,7 +4,7 @@ Date: 2015-12-08
 Title: Simple toolbox of data analysis functions
 Authors@R: person("Christian", "Tillich", role = c("aut", "cre"),
 		     email = "christian.tillich.walker@gmail.com")
-Imports:
+Depends:
    DBI
   ,ggplot2
   ,ggthemes
