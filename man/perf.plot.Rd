@@ -41,7 +41,7 @@ plot is a ggplot2 object.
 perf.plot(as.integer(iris$Species == "virginica"),iris[,1])
 perf.plot(as.integer(iris$Species == "virginica"),iris[,2])
 perf.plot(as.integer(iris$Species == "virginica"),iris[,3])
-perf.plot(as.integer(iris$Species == "virginica"),iris[,1], num.switch=F)
-perf.plot(as.integer(iris$Species == "virginica"),iris[,3], num.switch=F)
+perf.plot(as.integer(iris$Species == "virginica"),iris[,1], num.switch=FALSE)
+perf.plot(as.integer(iris$Species == "virginica"),iris[,3], num.switch=FALSE)
 }
 

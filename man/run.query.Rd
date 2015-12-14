@@ -4,10 +4,16 @@
 \alias{run.query}
 \title{run.query}
 \usage{
-run.query(query, conn = last_connection())
+run.query(x)
 }
 \description{
 is exactly berdie::read_query. I just like having function
 names separated by .s and column names separated by _
+
+Edit: That's how this started. Then I realized that given how the average
+query length is 20 mins longish and the DB has a tendency to reset itself
+after a couple, there's no reason not to make conn default to a new
+connection every time. Hopefully the DB is good at dropping connections.
+Trololololol.
 }
 

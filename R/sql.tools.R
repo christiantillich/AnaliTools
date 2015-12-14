@@ -31,8 +31,15 @@ read.query <- function(x) {
 #' run.query
 #' @description is exactly berdie::read_query. I just like having function
 #' names separated by .s and column names separated by _
+#'
+#' Edit: That's how this started. Then I realized that given how the average
+#' query length is 20 mins longish and the DB has a tendency to reset itself
+#' after a couple, there's no reason not to make conn default to a new
+#' connection every time. Hopefully the DB is good at dropping connections.
+#' Trololololol.
 #' @export
-run.query <- run_query
+run.query <- function(x) run_query(x, conn=reset.conn())
+
 
 #These are just helper functions for the functions below. Won't export.
 query.split <- function(q) strsplit(q, " ")[[1]]

@@ -84,8 +84,8 @@ library(magrittr)
 #' @examples perf.plot(as.integer(iris$Species == "virginica"),iris[,1])
 #' perf.plot(as.integer(iris$Species == "virginica"),iris[,2])
 #' perf.plot(as.integer(iris$Species == "virginica"),iris[,3])
-#' perf.plot(as.integer(iris$Species == "virginica"),iris[,1], num.switch=F)
-#' perf.plot(as.integer(iris$Species == "virginica"),iris[,3], num.switch=F)
+#' perf.plot(as.integer(iris$Species == "virginica"),iris[,1], num.switch=FALSE)
+#' perf.plot(as.integer(iris$Species == "virginica"),iris[,3], num.switch=FALSE)
 perf.plot <- function(y, x
   ,xlab = deparse(substitute(x))
   ,ylab = deparse(substitute(y))
@@ -143,7 +143,7 @@ perf.plot <- function(y, x
         ,stat="identity"
         ,fill=I("grey")
         ,origin = 10
-      ) + theme_BA +
+      ) + theme_BA() +
       geom_point(aes(y=avg), color=I(col)) +
       if(num.switch){
         geom_line(aes(y=avg), color=I(col))
