@@ -21,7 +21,7 @@ reset.conn <- function(...) options()$avant.database.yml %>%
 read.query <- function(x) {
   x %>%
     readLines(encoding = "UTF-8") %>%
-    gsub(' --.*','',.) %>%
+    gsub('--.*','',.) %>%
     paste(collapse=' ') %>%
     sub('\uFEFF','',.) #this last part gets rid of byte order marks.
 }
