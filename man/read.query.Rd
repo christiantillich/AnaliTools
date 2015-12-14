@@ -11,9 +11,7 @@ read.query(x)
 }
 \value{
 Returns the modified character string with odd line-ending characters
-removed.
-TODO: This function collapses queries in a way that's harmful to
-comments made via --.
+removed, as well as any '--' style comments.
 }
 \description{
 A wrapper for read_query, with some additional workarounds for

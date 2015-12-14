@@ -17,15 +17,13 @@ reset.conn <- function(...) options()$avant.database.yml %>%
 #' @param x - query as a character string
 #' @export
 #' @return Returns the modified character string with odd line-ending characters
-#' removed.
+#' removed, as well as any '--' style comments.
 read.query <- function(x) {
   x %>%
     readLines(encoding = "UTF-8") %>%
+    gsub(' --.+','',.) %>%
     paste(collapse=' ') %>%
     sub('\uFEFF','',.) #this last part gets rid of byte order marks.
-
-  #' TODO: This function collapses queries in a way that's harmful to
-  #' comments made via --.
 }
 
 #' run.query
