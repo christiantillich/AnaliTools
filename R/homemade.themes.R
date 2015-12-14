@@ -1,6 +1,6 @@
 
-require(grid)
-require(ggthemes)
+library(grid)
+library(ggthemes)
 
 
 #' theme_BA()
