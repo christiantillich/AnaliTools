@@ -17,4 +17,6 @@ theme_BA <- function(){
   x$plot.margin = unit(c(0.1,0.1,0.1,0.1), 'npc')
   x$axis.title.x$vjust = -1
   x$axis.title.y$vjust = 2.5
+
+  return(x)
 }
