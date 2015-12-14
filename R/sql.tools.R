@@ -10,15 +10,15 @@ require(plyr)
 reset.conn <- function(...) options()$avant.database.yml %>%
   berdie::postgresql_connection()
 
+
 #' read.query
 #' @description A wrapper for read_query, with some additional workarounds for
 #' the way Windows handles text files.
 #' @param x - query as a character string
+#' @export
 #' @return Returns the modified character string with odd line-ending characters
 #' removed.
-#' @export
 read.query <- function(x) {
-  #'
   x %>%
     readLines(encoding = "UTF-8") %>%
     paste(collapse=' ') %>%

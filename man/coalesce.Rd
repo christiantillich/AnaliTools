@@ -12,4 +12,7 @@ equivalent to postgres coalesce(x,y)
 \description{
 DataSci's coalesce function. Gives postgres-like coalesce
 }
+\examples{
+NULL \%||\% 'a'
+}
 

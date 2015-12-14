@@ -36,7 +36,7 @@ del <- function(df, c) colnames(df[!colnames(df) %in% c])
 #' @return equivalent to postgres coalesce(x,y)
 #' @rdname coalesce
 #' @export
-#' @examples
+#' @examples NULL %||% 'a'
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
 
