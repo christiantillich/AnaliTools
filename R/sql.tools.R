@@ -35,8 +35,10 @@ read.query <- function(x) {
 #' after a couple, there's no reason not to make conn default to a new
 #' connection every time. Hopefully the DB is good at dropping connections.
 #' Trololololol.
+#' @param x - query as a character vector
+#' @param conn - as the connection object. See berdie::postgresql_connection
 #' @export
-run.query <- function(x) run_query(x, conn=reset.conn())
+run.query <- function(x, conn=reset.conn()) run_query(x, conn)
 
 
 #These are just helper functions for the functions below. Won't export.

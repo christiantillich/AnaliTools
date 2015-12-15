@@ -4,7 +4,7 @@
 \alias{run.query}
 \title{run.query}
 \usage{
-run.query(x)
+run.query(x, conn = reset.conn())
 }
 \description{
 is exactly berdie::read_query. I just like having function
