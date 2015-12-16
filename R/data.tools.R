@@ -116,7 +116,10 @@ data.frame.compare <- function(df,df2,...){
   df.fin[is.na(df.fin)] <- 'NA'
   v <- -c(recs.1,recs.2)
   if(length(v) == 0){v <- rep(T, nrow(df.fin))}
-  recs <- apply(as.data.frame(df.fin[v,x] != df.fin[v,y]), 1, any)
+  # recs <- apply(as.data.frame(df.fin[v,x] != df.fin[v,y]), 1, any)
+  recs <- (as.character(df.fin[v,x]) != as.character(df.fin[v,y])) %>%
+    as.data.frame %>%
+    apply(1,any)
   if(sum(recs) > 0){
     warning(paste("There are",sum(recs),"mismatched records in the full set"))
   }
