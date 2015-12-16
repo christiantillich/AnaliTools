@@ -6,6 +6,11 @@
 \usage{
 run.query(x, conn = reset.conn())
 }
+\arguments{
+\item{x}{- query as a character vector}
+
+\item{conn}{- as the connection object. See berdie::postgresql_connection}
+}
 \description{
 is exactly berdie::read_query. I just like having function
 names separated by .s and column names separated by _
