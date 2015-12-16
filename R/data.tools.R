@@ -60,13 +60,13 @@ empty.frame <- function(col.names) data.frame(row.names = col.names) %>% t
 #' functionality here. So the user must define the join explicitly.
 #' @return A list object containing
 #' @export
-data.frame.compare <- function(df,df2,by){
+data.frame.compare <- function(df,df2,...){
 
   #This may be a big operation, so clear unused memory
   gc()
 
   #Join the data frames together
-  df.fin <- merge(df, df2,by = by,all=T)
+  df.fin <- merge(df, df2,...,all=T)
 
   #Define the joined columns, the .x columns, and the .y columns
   x <- colnames(df.fin) %>% grep('.x$',.) %>% colnames(df.fin)[.]
@@ -91,20 +91,24 @@ data.frame.compare <- function(df,df2,by){
   }
   out$duplicates <- recs
 
-
+  
+  
   #Did any record have a .x or .y that's all null?
-  recs.1 <- df.fin[x] %>% sapply(is.na) %>% apply(1,all) %>% which
+  recs.1 <- df.fin[y] %>% sapply(is.na) %>% apply(1,all) %>% which
   if(length(recs.1) > 0){
-    warning(paste("There are",length(recs.1),"unmatched records in table 1"))
-    out$table.1.unmatched <- df.fin[recs.1, keys]
+    warning(paste("There are",length(recs.1),"records in table 1 that don't have a match in table 2"))
+    out$table.1.unmatched <- df.fin[recs.1, c(keys,x)]
   }
 
-
-  recs.2 <- df.fin[y] %>% sapply(is.na) %>% apply(1,all) %>% which
+  
+  recs.2 <- df.fin[x] %>% sapply(is.na) %>% apply(1,all) %>% which
   if(length(recs.2) > 0){
-    warning(paste("There are",length(recs.2),"unmatched records in table 2"))
-    out$table.2.unmatched <- df.fin[recs.2, keys]
+    warning(paste("There are",length(recs.2),"records in table 2 that don't have a match in table 1"))
+    out$table.2.unmatched <- df.fin[recs.2, c(keys,y)] %>% as.data.frame
   }
+
+
+
 
 
 

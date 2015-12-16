@@ -4,7 +4,7 @@
 \alias{data.frame.compare}
 \title{data.frame.compare}
 \usage{
-data.frame.compare(df, df2, by)
+data.frame.compare(df, df2, ...)
 }
 \arguments{
 \item{df}{- The first data frame}
