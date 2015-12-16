@@ -59,6 +59,7 @@ empty.frame <- function(col.names) data.frame(row.names = col.names) %>% t
 #' on merge is all same-named columns, which would defeat a lot of the
 #' functionality here. So the user must define the join explicitly.
 #' @return A list object containing
+#' @export
 data.frame.compare <- function(df,df2,by){
 
   #This may be a big operation, so clear unused memory
