@@ -9,3 +9,15 @@ vec.text <- function(x) {
 }
 
 
+
+#' source.all
+#' @description Why source one file when you can source a whole directory?
+#' @param path - Path to the directory you wish to source
+#' @return returns null
+#' @export
+source.all <- function(path){
+  path %>%
+    paste(., list.files(.), sep="/") %>%
+    grep('.+\\.R',., value=T) %>%
+    sapply(source)
+}
