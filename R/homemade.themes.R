@@ -20,3 +20,14 @@ theme_BA <- function(){
 
   return(x)
 }
+
+#' qsave
+#' @description Just a ggsave wrapper but with presaved settings
+#' @param filename - file name/filename of plot
+#' @param height - ggsave input. Defaults to 6.
+#' @param width - ggsave input. Defaults to 9.
+#' @param dpi - ggsave input. Defaults to 600.
+#' @export
+qsave <- function(filename,height=6, width=9,dpi=600,...) {
+  ggsave(filename,height=height, width=width,dpi=dpi,...)
+}
