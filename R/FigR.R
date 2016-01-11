@@ -107,14 +107,12 @@ write.all.FigR <- function(self){
     name <- paste0(self$write.path, name, self$type)
     print(paste("Printing", name))
     qsave(name,plot=self$images[[x]])
-    i <- i + 1
+    i <<- i + 1
   }
 
   lapply(names(self$images), helper)
   return()
 }
-
-
 
 
 # test <- FigR()
