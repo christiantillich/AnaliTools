@@ -103,7 +103,7 @@ write.all.FigR <- function(self){
   i <- self$index
 
   helper <- function(x){
-    name <- paste0('/fig', formatC(self$index, digits=2, flag=0),'_',x)
+    name <- paste0('/fig', formatC(i, digits=2, flag=0),'_',x)
     name <- paste0(self$write.path, name, self$type)
     print(paste("Printing", name))
     qsave(name,plot=self$images[[x]])
