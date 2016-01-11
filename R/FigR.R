@@ -110,7 +110,7 @@ write.all.FigR <- function(self){
     i <- i + 1
   }
 
-  lapply(names(test$images), helper)
+  lapply(names(self$images), helper)
   return()
 }
 
