@@ -9,14 +9,21 @@ library(ggthemes)
 #' @export
 theme_BA <- function(){
   x <- ggthemes::theme_gdocs()
-  x$plot.title$size = 25
-  x$plot.title$hjust = 0.5
-  x$plot.title$vjust = 4
+  
+#   x$plot.title$vjust = 0
   x$axis.text.x$angle = 45
   x$axis.title.y$angle = 90
   x$plot.margin = grid::unit(c(0.1,0.1,0.1,0.1), 'npc')
+  
+  x$plot.title$size = 25
+  x$plot.title$hjust = 0.35
+  x$plot.title$margin = grid::unit(c(0,1,1,1), 'npc')
+  
   x$axis.title.x$vjust = -1
-  x$axis.title.y$vjust = 2.5
+  x$axis.title.y$vjust = 100
+  x$axis.title.y$hjust = 0.5
+  x$axis.title.x$margin = grid::unit(c(1,1,1,1), 'npc')
+  x$axis.title.y$margin = grid::unit(c(0,1.5,0,0), 'npc')
 
   return(x)
 }
