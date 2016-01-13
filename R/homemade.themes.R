@@ -11,12 +11,13 @@ theme_BA <- function(){
   x <- ggthemes::theme_gdocs()
   
   #Controls for the full plot margins
-  x$plot.margin = grid::unit(c(0.1,0.1,0.1,0.1), 'npc')
+  x$plot.margin = grid::unit(c(0.05,0.05,0.05,0.05), 'npc')
   
   #Controls for the main title text. 
   x$plot.title$size = 25
-  x$plot.title$hjust = 0.35
-  x$plot.title$margin = grid::unit(c(0,1,1,1), 'npc')
+  x$plot.title$hjust = 0.3
+  x$plot.title$vjust = -10
+  x$plot.title$margin = grid::unit(c(1,1,1,1), 'npc')
   
   #Controls titles for the x and y axis. 
   x$axis.title.y$angle = 90
