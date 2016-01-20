@@ -105,7 +105,6 @@ find.dates <- function(q, return.place = F){
 replace.dates <- function(q, dates){
 
   #If the date entries don't have quotes, add them.
-  print(dates)
   dates[not(grepl("'",dates))] <- paste0("'",dates,"'")
 
   #Get the split query and the location of dates in the query.
