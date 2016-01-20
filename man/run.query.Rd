@@ -4,7 +4,7 @@
 \alias{run.query}
 \title{run.query}
 \usage{
-run.query(x, conn = reset.conn())
+run.query(x, conn = last_connection())
 }
 \arguments{
 \item{x}{- query as a character vector}
@@ -20,5 +20,16 @@ query length is 20 mins longish and the DB has a tendency to reset itself
 after a couple, there's no reason not to make conn default to a new
 connection every time. Hopefully the DB is good at dropping connections.
 Trololololol.
+
+Edit 2: So, broadly, there are two types of queries you might run. One is
+standalone, you could put it into a pgAdmin window and be just fine. The other
+is like row-lookup style - I need to hit the db for each row, and each
+query I'm generating uses information from that row. This latter case, I've
+noticed, runs into a weird error called "Inactive result set." I can't find
+anyone online who's run into this, but it feels a bit like a locking error,
+since it seems to happen to random entries. So I'm putting in some recursive
+logic here to just rerun the query if this error hits. Also defaulting back
+to last_connection() and using similar recursive logic to reset the connection
+if it fails. So should be much more efficient about connection usage now.
 }
 

@@ -15,9 +15,9 @@ reset.conn <- function(...) options()$avant.database.yml %>%
 #' @description A wrapper for read_query, with some additional workarounds for
 #' the way Windows handles text files.
 #' @param x - query as a character string
-#' @export
 #' @return Returns the modified character string with odd line-ending characters
 #' removed, as well as any '--' style comments.
+#' @export
 read.query <- function(x) {
   x %>%
     readLines(encoding = "UTF-8") %>%
@@ -35,10 +35,34 @@ read.query <- function(x) {
 #' after a couple, there's no reason not to make conn default to a new
 #' connection every time. Hopefully the DB is good at dropping connections.
 #' Trololololol.
+#'
+#' Edit 2: So, broadly, there are two types of queries you might run. One is
+#' standalone, you could put it into a pgAdmin window and be just fine. The other
+#' is like row-lookup style - I need to hit the db for each row, and each
+#' query I'm generating uses information from that row. This latter case, I've
+#' noticed, runs into a weird error called "Inactive result set." I can't find
+#' anyone online who's run into this, but it feels a bit like a locking error,
+#' since it seems to happen to random entries. So I'm putting in some recursive
+#' logic here to just rerun the query if this error hits. Also defaulting back
+#' to last_connection() and using similar recursive logic to reset the connection
+#' if it fails. So should be much more efficient about connection usage now.
 #' @param x - query as a character vector
 #' @param conn - as the connection object. See berdie::postgresql_connection
 #' @export
-run.query <- function(x, conn=reset.conn()) run_query(x, conn)
+run.query <- function(x, conn=last_connection()){
+  df <- try(run_query(x, conn))
+
+  #Setting the stage for error handling.
+  if(class(df) == 'try-error'){
+    if(df[1] == "Error : Inactive result set\n"){df <- run.query(x)}
+    if(df[1] == "Error : is(conn, \"PqConnection\") is not TRUE\n"){
+      reset.conn()
+      run.query(x)
+    }
+  }
+  # print(df)
+  return(df)
+}
 
 
 #These are just helper functions for the functions below. Won't export.
@@ -79,7 +103,9 @@ find.dates <- function(q, return.place = F){
 #' @return Function returns the original query text, but with the new dates.
 #' @export
 replace.dates <- function(q, dates){
-  #'
+  #'If the date entries don't have quotes, add them.
+  print(dates)
+  dates[not(grepl("'",dates))] <- paste0("'",dates,"'")
 
   #Get the split query and the location of dates in the query.
   v <- find.dates(q, T)
