@@ -111,46 +111,44 @@ perf.plot <- function(y, x
       )
 
   #Plot the data from the modified summary data frame
-#   plot(t$count
-#     ,type='h'
-#     ,lwd = lwd,
-#     ,lend='square', col='grey'
-#     ,xaxt='n', yaxt='n', ylab='', xlab=''
-#     )
-#   axis(side=1, labels=t$buckets, at=1:nrow(t), las=2)
-#   axis(side=4, at=pretty(t$count), labels=T)
-#   par(new=TRUE)
-#   plot(t$avg,
-#      type = 'b', col=col,
-#      xaxt='n',xlab = xlab, ylab = ylab,
-#      main = main
-#     )
+  #   plot(t$count
+  #     ,type='h'
+  #     ,lwd = lwd,
+  #     ,lend='square', col='grey'
+  #     ,xaxt='n', yaxt='n', ylab='', xlab=''
+  #     )
+  #   axis(side=1, labels=t$buckets, at=1:nrow(t), las=2)
+  #   axis(side=4, at=pretty(t$count), labels=T)
+  #   par(new=TRUE)
+  #   plot(t$avg,
+  #      type = 'b', col=col,
+  #      xaxt='n',xlab = xlab, ylab = ylab,
+  #      main = main
+  #     )
 
-  qplot(
-     buckets
-    ,avg
-    ,data=t
-    ,geom= if(num.switch){"line"} else{"point"}
-    ,color=I(col),xlab = xlab,ylab = ylab,main=main
-  ) + geom_histogram(
-         aes(y=count * max(abs(avg))/max(count))
-        ,stat="identity"
-        ,fill=I("grey")
-        ,origin = 10
-      ) +
-      geom_histogram(
-         aes(y= if(min(avg) < 0) {-count * max(abs(avg))/max(count)} else{0})
-        ,stat="identity"
-        ,fill=I("grey")
-        ,origin = 10
-      ) + theme_BA() +
+  ggplot(
+    data = t, mapping = aes(
+       x = buckets
+      # ,y = avg
+    )
+  ) + theme_BA() +
       geom_point(aes(y=avg), color=I(col)) +
-      if(num.switch){
-        geom_line(aes(y=avg), color=I(col))
-      }
-
+      geom_bar(
+       aes(y=count * max(abs(avg))/max(count))
+       ,stat="identity"
+       ,fill=I("grey")
+       ,alpha = I(0.50)
+      ) +
+     geom_bar(
+       aes(y=-count * max(abs(avg))/max(count))
+      ,stat="identity"
+      ,fill=I("grey")
+      ,alpha = I(0.50)
+    )  +
+    if(num.switch){
+      geom_line(aes(y=avg), color=I(col))
+    }
 }
-
 
 # perf.plot(as.integer(iris$Species == "virginica"),iris[,1])
 # perf.plot(as.integer(iris$Species == "virginica"),iris[,2])
