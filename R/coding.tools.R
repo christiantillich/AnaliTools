@@ -21,3 +21,12 @@ source.all <- function(path){
     grep('.+\\.R',., value=T) %>%
     sapply(source)
 }
+
+#' snake.case
+#' @param text - User Input Text
+#' @return Function returns text that is formatted to snake case. 
+#' @export
+#' @examples
+snake.case <- function(text){
+  gsub('\\W+', '_', tolower(text))
+}
