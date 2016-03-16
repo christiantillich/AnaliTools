@@ -143,5 +143,57 @@ get.files <- function(x) {
   do.call(rbind,lapply(csvs, read.csv))
 }
 
-#' These two will enumerate the .csv files in a path, as well as load them
-#' into a data frame.
+#' query.batcher
+#'
+#' @description This function chunks a query into smaller portions, to improve
+#' runtime performance and get around that 2 hour forced limit on the DB. The
+#' query must only contain two text strings formatted as a date; if there are
+#' additional hardcoded dates, this function will break.
+#' @param query.path - The path to the query, as a string.
+#' @param data.path - The path to dump the data into, as a string
+#' @param start.date - The start date for the query.
+#' @param end.date - The end date for the query.
+#' @param interval - A string input for the interval to chunk by. See 'by' input
+#' parameter from seq(). Defaults to '1 month'.
+#' @export
+query.batcher <- function (
+  query.path
+  ,data.path
+  ,start.date
+  ,end.date
+  ,interval='1 month'
+){
+  #Get the name of the query we're executing.
+  file.name <- query.path %>% gsub('.sql','',.,fixed=T) %>% gsub('.+/','',.)
+
+  #Force inputs to dates.
+  start.date <- as.Date(start.date)
+  end.date <- as.Date(end.date)
+
+  #Make sure the user knows what's going on.
+  print(paste('Pulling files between', start.date, 'and', end.date))
+
+  #Grab the core query.
+  query <- read.query(query.path)
+
+
+  #These are the months we'll be running for
+  dates <- seq(start.date, end.date, by = interval) %>%
+    as.character
+
+  #Run that shit.
+  for(i in 1:(length(dates)-1)){
+    reset.conn()
+    d <- replace.dates(query, c(dates[i], dates[i+1])) %>%  run.query()
+    write.csv(d,paste0(data.path,'/',file.name,"_",gsub('[/-]','_',dates[i]),".csv"))
+  }
+
+  print("Data Retrieved Successfully!")
+}
+
+# setwd('C:/Users/ctilli82/Desktop/query_batcher_test')
+# query.batcher('queries/test_1.sql','Data','2015-01-01','2015-01-10',interval='1 day')
+# query.batcher('queries/test_2.sql','Data','2015-05-01','2015-05-03',interval='1 day')
+# query.batcher('queries/test_3.sql','Data','2015-09-01','2015-09-04',interval='1 day')
+
+
