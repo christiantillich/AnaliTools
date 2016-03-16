@@ -143,8 +143,9 @@ get.files <- function(x) {
   do.call(rbind,lapply(csvs, read.csv))
 }
 
-#' query.batcher
-#'
+
+
+#' query.chunker
 #' @description This function chunks a query into smaller portions, to improve
 #' runtime performance and get around that 2 hour forced limit on the DB. The
 #' query must only contain two text strings formatted as a date; if there are
@@ -155,9 +156,10 @@ get.files <- function(x) {
 #' @param end.date - The end date for the query.
 #' @param interval - A string input for the interval to chunk by. See 'by' input
 #' parameter from seq(). Defaults to '1 month'.
-#' @export
-query.batcher <- function (
-  query.path
+#' @return NULL
+#' @export query.chunker
+query.chunker <- function (
+   query.path
   ,data.path
   ,start.date
   ,end.date
