@@ -37,7 +37,7 @@ del <- function(df, c) colnames(df[!colnames(df) %in% c])
 #' @rdname coalesce
 #' @export
 #' @examples NULL %||% 'a'
-`%||%` <- function(x, y) if (is.null(x)) y else x
+`%||%` <- function(x, y) if (is.null(x) || is.na(x)) y else x
 
 
 

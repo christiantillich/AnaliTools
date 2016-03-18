@@ -65,62 +65,6 @@ run.query <- function(x, conn=last_connection()){
 }
 
 
-#These are just helper functions for the functions below. Won't export.
-query.split <- function(q) strsplit(q, " ")[[1]]
-query.combine <- function(q) paste(q,collapse=" ")
-date.reg <- "'\\d+[/-]\\d+[/-]\\d+'"
-
-
-#' find.dates
-#' @description Will parse query text and returns base on return.place. If true
-#' function returns a vector of the available dates in a query. If false,
-#' returns a vector of the logical position of dates in the vector created by
-#' query.split.
-#' @param q - query as a single character string
-#' @param return.place - switch for showing date values, or date locations
-#' @return If return.place = F, function returns a string of booleans, one
-#' for each word in the query, where T indicates that the string is coded as
-#' a date. If return.place = T, the function returns a vector of each date
-#' string coded into the query.
-#' @export
-find.dates <- function(q, return.place = F){
-
-  is.date.text <- function(x) grepl(date.reg, x)
-  v <- sapply(query.split(q), is.date.text, USE.NAMES=F)
-  if(return.place){return (v)} else{
-    return(query.split(q)[v])
-  }
-}
-
-
-#' replace.dates
-#' @description Replaces query dates with a vector of dates specified by the
-#' user. Function will error if length(dates) is not the same as dates found by
-#' find.dates.
-#' @param q - query as a single character string
-#' @param dates - a vector of dates to replace in the query. Function will error
-#' if length(dates) != length(find.dates(q,T))
-#' @return Function returns the original query text, but with the new dates.
-#' @export
-replace.dates <- function(q, dates){
-
-  #If the date entries don't have quotes, add them.
-  dates[not(grepl("'",dates))] <- paste0("'",dates,"'")
-
-  #Get the split query and the location of dates in the query.
-  v <- find.dates(q, T)
-  text <- query.split(q)
-
-  #Logical check. Stop query if lengths aren't the same.
-  if(length(text[v]) != length(dates)) {
-    stop("Input Dates and Query Dates aren't same length")
-  }
-
-  #Do the replacement.
-  replace.date.text <- function(x,y) gsub(date.reg, y, x)
-  text[v] <- mapply(replace.date.text,text[v],dates,USE.NAMES = F)
-  return(query.combine(text))
-}
 
 #' file.paths
 #' @description Takes an input file path and returns the full system path
