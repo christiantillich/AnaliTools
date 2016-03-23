@@ -9,6 +9,15 @@ vec.text <- function(x) {
 }
 
 
+#' vec.chunker
+#' @description Splits a vector into a list where each list element contains
+#' the next n values from the vector.
+#' @param x - any vector
+#' @return Returns a list
+#' @export
+vec.chunker <- function(x, n=100) split(x, ceiling(seq_along(x)/n))
+
+
 
 #' source.all
 #' @description Why source one file when you can source a whole directory?
@@ -24,7 +33,7 @@ source.all <- function(path){
 
 #' snake.case
 #' @param text - User Input Text
-#' @return Function returns text that is formatted to snake case. 
+#' @return Function returns text that is formatted to snake case.
 #' @export
 #' @examples
 snake.case <- function(text){
@@ -35,7 +44,7 @@ snake.case <- function(text){
 #' is.date.text
 #' @param x - An input string
 #' @return Function returns logical, to indicate whether the string could be
-#' turned into a date. 
+#' turned into a date.
 #' @export
 #' @examples
 is.date.text <- function(x){
@@ -52,7 +61,7 @@ is.date.text <- function(x){
 #' @param text - query as a single character string
 #' @param return.place - switch for showing date values, or date locations
 #' @param date.reg - The regular expression for the date string. Allows the
-#' user to change to match different formatting, if necessary. 
+#' user to change to match different formatting, if necessary.
 #' @return If return.place = F, function returns a string of booleans, one
 #' for each word in the query, where T indicates that the string is coded as
 #' a date. If return.place = T, the function returns a vector of each date
@@ -64,7 +73,7 @@ find.dates <- function(
   ,date.reg = "\\d+[/-]\\d+[/-]\\d+"
   ,text.split = function(x) x %>% as.character %>% strsplit(" ") %>% unlist
 ){
-  
+
   is.date <- function(x) grep(date.reg, x,value=T) %>% is.date.text
   v <- sapply(text.split(text), is.date, USE.NAMES=F)
   if(return.place){return (v)} else{
@@ -91,19 +100,19 @@ replace.dates <- function(
   ,text.split = function(x) x %>% as.character %>% strsplit(" ") %>% unlist
   ,text.combine = function(x) paste(x,collapse=" ")
 ){
-  
+
   #If the date entries don't have quotes, add them.
   # dates[not(grepl("'",dates))] <- paste0("'",dates,"'")
-  
+
   #Get the split text and the location of dates in the text.
   v <- find.dates(text, T,date.reg,text.split)
   words <- text.split(text)
-  
-  #Logical check. Stop if input date lengths don't match with original text. 
+
+  #Logical check. Stop if input date lengths don't match with original text.
   if(length(words[v]) != length(dates)) {
     stop("Input Dates and Query Dates aren't same length")
   }
-  
+
   #Do the replacement.
   replace.date.text <- function(x,y) gsub(date.reg, y, x)
   words[v] <- mapply(replace.date.text,words[v],dates,USE.NAMES = F)

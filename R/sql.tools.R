@@ -75,15 +75,21 @@ run.query <- function(x, conn=last_connection()){
 #' @export
 file.paths <- function(x) paste(x,list.files(x),sep="/")
 
+
+
+
 #' get.files
 #' @description Takes an input file path, look for all .csv files, and then
 #' append each file in that path into a single data frame.
 #' @param x - a single path, expressed as a character string
+#' @param match - A user-input regex to match to a subset of the filenames in a
+#' directory. Will only get files where grep(match)=T. The default value matches
+#' any .csv
 #' @return Function returns a single dataframe, which is the appended result
 #' of all .csv files at the path x.
 #' @export
-get.files <- function(x) {
-  csvs <- grep('\\.csv$',file.paths(x),value=TRUE)
+get.files <- function(x,match='\\.csv$') {
+  csvs <- grep(match,file.paths(x),value=TRUE)
   do.call(rbind,lapply(csvs, read.csv))
 }
 

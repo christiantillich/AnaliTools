@@ -4,7 +4,7 @@
 \alias{get.files}
 \title{get.files}
 \usage{
-get.files(x)
+get.files(x, match = "\\\\.csv$")
 }
 \arguments{
 \item{x}{- a single path, expressed as a character string}
