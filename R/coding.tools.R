@@ -5,7 +5,10 @@
 #' @return A text string formatted like an R vector, ie "c(var1, var2, ...)"
 #' @export
 vec.text <- function(x) {
-  x %>% paste(collapse="','") %>% paste("c('",.,"')",sep="")
+  x %>% 
+    format(scientific = F) %>% 
+    paste(collapse="','") %>% 
+    paste("c('",.,"')",sep="")
 }
 
 
