@@ -181,7 +181,7 @@ var.sum <- function(df){
 data.frame.plot <- function(
    df
   ,halign='left'
-  ,valign='center'
+  ,valign='top'
   ,mar=c(0,0,0,0)
   ,cex=0.75
   ,cmar=1
