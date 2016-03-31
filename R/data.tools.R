@@ -91,8 +91,8 @@ data.frame.compare <- function(df,df2,...){
   }
   out$duplicates <- recs
 
-  
-  
+
+
   #Did any record have a .x or .y that's all null?
   recs.1 <- df.fin[y] %>% sapply(is.na) %>% apply(1,all) %>% which
   if(length(recs.1) > 0){
@@ -100,7 +100,7 @@ data.frame.compare <- function(df,df2,...){
     out$table.1.unmatched <- df.fin[recs.1, c(keys,x)]
   }
 
-  
+
   recs.2 <- df.fin[x] %>% sapply(is.na) %>% apply(1,all) %>% which
   if(length(recs.2) > 0){
     warning(paste("There are",length(recs.2),"records in table 2 that don't have a match in table 1"))
@@ -170,3 +170,22 @@ var.sum <- function(df){
   return(t)
 }
 
+
+
+#' data.frame.plot
+#' @description Just a wrapper for gplots::textplot, but with actually useful
+#' starting parameters. For parameters beyond df, see textplot.
+#' @param df - The data frame to plot
+#' @return Returns NULL, but prints an image object displaying the data frame.
+#' @export
+data.frame.plot <- function(
+   df
+  ,halign='left'
+  ,valign='center'
+  ,mar=c(0,0,0,0)
+  ,cex=0.75
+  ,cmar=1
+  ,...
+){
+  textplot(df,halign,valign,mar=mar, cex=cex, cmar=cmar,...)
+}

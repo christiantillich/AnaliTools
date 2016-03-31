@@ -8,6 +8,10 @@ get.files(x, match = "\\\\.csv$")
 }
 \arguments{
 \item{x}{- a single path, expressed as a character string}
+
+\item{match}{- A user-input regex to match to a subset of the filenames in a
+directory. Will only get files where grep(match)=T. The default value matches
+any .csv}
 }
 \value{
 Function returns a single dataframe, which is the appended result
