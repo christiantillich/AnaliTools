@@ -189,3 +189,41 @@ data.frame.plot <- function(
 ){
   textplot(df,halign,valign,mar=mar, cex=cex, cmar=cmar,...)
 }
+
+
+#' cap
+#' @description Imposes lower and upper bounds on a value.
+#' @param x - Input
+#' @param lbnd - The lower bound. Defaults to -Inf
+#' @param ubnd - The upper bound. Defaults to Inf
+#' @return Returns the input value if it's within the bounds. If the input
+#' exceeds one of the bounds, cap returns the bound value instead.
+#' @export
+#' @examples
+cap <- function(x, lbnd=-Inf, ubnd=Inf) min(max(x, lbnd),ubnd)
+
+#' s.cap
+#' @description An sapply wrapper for cap.
+#' @param v - A vector input.
+#' @param lbnd - The lower bound. Defaults to -Inf.
+#' @param ubnd - The upper bound. Defaults to Inf
+#' @return Returns the vector, where values are replaced by the bound if they
+#' exceed that limit.
+#' @export
+#' @examples
+s.cap <- function(v, lbnd=-Inf, ubnd=Inf){
+  sapply(v,function(y) cap(y,lbnd,ubnd))
+}
+
+#' l.cap
+#' @description An lapply wrapper for cap.
+#' @param v - A list input.
+#' @param lbnd - The lower bound. Defaults to -Inf.
+#' @param ubnd - The upper bound. Defaults to Inf
+#' @return Returns the list, where values are replaced by the bound if they
+#' exceed that limit.
+#' @export
+#' @examples
+l.cap <- function(v, lbnd=-Inf, ubnd=Inf){
+  lapply(v,function(y) cap(y,lbnd,ubnd))
+}
