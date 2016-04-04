@@ -182,7 +182,7 @@ data.frame.plot <- function(
    df
   ,halign='left'
   ,valign='top'
-  ,mar=c(0,0,0,0)
+  ,mar=c(0,0,3,0)
   ,cex=0.75
   ,cmar=1
   ,...
