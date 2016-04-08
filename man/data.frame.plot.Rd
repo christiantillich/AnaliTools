@@ -4,7 +4,7 @@
 \alias{data.frame.plot}
 \title{data.frame.plot}
 \usage{
-data.frame.plot(df, halign = "left", valign = "top", mar = c(0, 0, 0, 0),
+data.frame.plot(df, halign = "left", valign = "top", mar = c(0, 0, 3, 0),
   cex = 0.75, cmar = 1, ...)
 }
 \arguments{

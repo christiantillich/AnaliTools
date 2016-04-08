@@ -227,3 +227,34 @@ s.cap <- function(v, lbnd=-Inf, ubnd=Inf){
 l.cap <- function(v, lbnd=-Inf, ubnd=Inf){
   lapply(v,function(y) cap(y,lbnd,ubnd))
 }
+
+
+
+#' cat.cap
+#' @description Takes a vector of categorical values and collapses the vector
+#' into the first 'lim' unique values (by volume), and the rest are collapsed to
+#' an 'other' category.
+#' @param vector - The input vector
+#' @param lim - A numeric limit on the number
+#' @param ret - The category that all other values are collapsed into. Defaults
+#' to 'other'.
+#' @return Returns the vector, where all values not in the x top values are
+#' replaced with the value for ret.
+#' @export
+cat.cap <- function(vector, lim=50, ret='other'){
+  col.sum <- vector %>% table %>% sort(T) %>% head(lim)
+
+  vector %>% table %>% sort(T) %>%
+    data.frame(
+      val=names(.)
+      , count=.
+      , pct=cumsum(.)/sum(.)
+      ,row.names=NULL
+    ) %>% head(lim) %>% textplot('left','top',mar=c(0,0,0,0), cex=0.75, cmar=1)
+
+  ifelse(
+    as.character(vector) %in% names(col.sum)
+    ,as.character(vector)
+    ,ret
+  ) %>% return
+}
