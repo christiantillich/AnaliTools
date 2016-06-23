@@ -258,3 +258,35 @@ cat.cap <- function(vector, lim=50, ret='other'){
     ,ret
   ) %>% return
 }
+
+
+
+#' zero.out
+#' @description Replaces NA/Inf values with 0.
+#' @param x - A numeric vector.
+#' @return Returns x but with NA/Inf values replaced with zero.
+#' @export
+#' @examples
+zero.out <- function(x){
+  x[is.na(x) | is.infinite(x)] <- 0
+  return(x)
+}
+
+
+
+
+#' cum.sum
+#' @description - A better cumulative summing function. This one ignores
+#' NA/Inf values in the cumulative sum's history, but also returns NA for
+#' the values that are explicitly NA/Inf. The result noticeable graphically -
+#' Troublesome values are treated as missing, but the missing value itself
+#' does not cause a problem when computing the prior history.
+#' @param x - A numerical vector
+#' @return - Returns a cumulative sum vector that is more suitable to graphing.
+#' @export
+#' @examples
+cum.sum <- function(x) {
+  ifelse(is.na(x) | is.infinite(x), NA, cumsum(zero.out(x)))
+}
+
+
