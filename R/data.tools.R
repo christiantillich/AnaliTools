@@ -266,7 +266,6 @@ cat.cap <- function(vector, lim=50, ret='other'){
 #' @param x - A numeric vector.
 #' @return Returns x but with NA/Inf values replaced with zero.
 #' @export
-#' @examples
 zero.out <- function(x){
   x[is.na(x) | is.infinite(x)] <- 0
   return(x)
@@ -284,9 +283,8 @@ zero.out <- function(x){
 #' @param x - A numerical vector
 #' @return - Returns a cumulative sum vector that is more suitable to graphing.
 #' @export
-#' @examples
 cum.sum <- function(x) {
-  ifelse(is.na(x) | is.infinite(x), NA, cumsum(zero.out(x)))
+  ifelse(is.na(x) | is.infinite(x), as.numeric(NA), cumsum(zero.out(x)))
 }
 
 
