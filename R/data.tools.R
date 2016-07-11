@@ -199,7 +199,6 @@ data.frame.plot <- function(
 #' @return Returns the input value if it's within the bounds. If the input
 #' exceeds one of the bounds, cap returns the bound value instead.
 #' @export
-#' @examples
 cap <- function(x, lbnd=-Inf, ubnd=Inf) min(max(x, lbnd),ubnd)
 
 #' s.cap
@@ -210,7 +209,6 @@ cap <- function(x, lbnd=-Inf, ubnd=Inf) min(max(x, lbnd),ubnd)
 #' @return Returns the vector, where values are replaced by the bound if they
 #' exceed that limit.
 #' @export
-#' @examples
 s.cap <- function(v, lbnd=-Inf, ubnd=Inf){
   sapply(v,function(y) cap(y,lbnd,ubnd))
 }
@@ -223,7 +221,6 @@ s.cap <- function(v, lbnd=-Inf, ubnd=Inf){
 #' @return Returns the list, where values are replaced by the bound if they
 #' exceed that limit.
 #' @export
-#' @examples
 l.cap <- function(v, lbnd=-Inf, ubnd=Inf){
   lapply(v,function(y) cap(y,lbnd,ubnd))
 }
@@ -287,4 +284,20 @@ cum.sum <- function(x) {
   ifelse(is.na(x) | is.infinite(x), as.numeric(NA), cumsum(zero.out(x)))
 }
 
+
+
+#Function to clip the end value off a vector.
+#' Clip.Tail
+#'
+#' @param x - a vector whose tail you'll be clipping.
+#' @param repl - The value to replace. Defaults to zero. #'
+#' @return - Returns a vector where any continuous series of repl at the end of
+#' the vector is replace with NA
+#' @export
+clip.tail <- function(x, repl=0){
+  v <- grepl(repl,x) | is.na(x) | is.infinite(x)
+  v <- as.logical(rev(cumprod(rev(v))))
+  x[v] <- as.numeric(NA)
+  return(x)
+}
 
