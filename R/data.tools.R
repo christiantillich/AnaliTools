@@ -166,7 +166,7 @@ var.sum <- function(df){
   t$N <- as.integer(as.character(t$N))
   t$nulls <- as.integer(as.character(t$nulls))
   t$distinct <- as.integer(as.character(t$distinct))
-  print(table(t$type))
+  # print(table(t$type))
   return(t)
 }
 
