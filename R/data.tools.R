@@ -295,7 +295,7 @@ cum.sum <- function(x) {
 #' the vector is replace with NA
 #' @export
 clip.tail <- function(x, repl=0){
-  v <- grepl(repl,x) | is.na(x) | is.infinite(x)
+  v <-  (x == 0) | is.na(x) | is.infinite(x)
   v <- as.logical(rev(cumprod(rev(v))))
   x[v] <- as.numeric(NA)
   return(x)
