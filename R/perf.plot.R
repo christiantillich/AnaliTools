@@ -103,7 +103,7 @@ perf.plot <- function(y, x
   #This is the main data manipulation step. Gets summary stats by bucket.
   t <- data.frame(x, buckets, y) %>%
     group_by(buckets) %>%
-    summarise(count = n(), avg = mean(y)) %>%
+    summarise(count = n(), avg = mean(y, na.rm=T)) %>%
     merge(as.data.frame(groups), by.x="buckets", by.y="groups", all.y=T) %>%
     mutate(
        count = replace(count, is.na(count), 0)
