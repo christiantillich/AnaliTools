@@ -271,13 +271,16 @@ cat.cap <- function(vector, lim=50, ret='other'){
 #' @export
 impute.var <- function(df, var, formula, plots=F){
 
+  #Name of the new variable
+  new.var = paste0('imp_',var)
+
   #Create the model for imputation.
   mdl <- lm(paste(var,'~',formula),data = df)
 
   #Create the imputed vector, add it to the data frame
   #Doing it this way gets the na's right.
   y.hat <- predict(mdl, newdata=df)
-  df[paste0('imp_',var)] <- ifelse(!is.na(df[[var]]), df[[var]], y.hat)
+  df[new.var] <- ifelse(!is.na(df[[var]]), df[[var]], y.hat)
 
   #If plots = true, plot a time series by month of the real variable
   #superimposed over the imputation. Also maybe return the model summary?
@@ -285,7 +288,7 @@ impute.var <- function(df, var, formula, plots=F){
 
     #Imputation model
     mdl %>% summary %>% coef %>% round(4) %>% data.frame.plot(halign="center")
-    title("Imputation Model")
+    title(paste0("Imputation Model - ",var))
 
     #Shows the time-series with the raw and imputed values
     plot(
@@ -295,7 +298,7 @@ impute.var <- function(df, var, formula, plots=F){
         summarise_(
           raw = interp(~mean(val, na.rm = TRUE), val = as.name(var))
           ,interp =
-            interp(~mean(val,na.rm= TRUE),val=as.name(paste0('imp_',var)))
+             interp(~mean(val,na.rm= TRUE),val=as.name(new.var))
           ,count = interp(~n())
         ) %>%
         qplot(funding.mth, raw, data=., alpha=count, geom=c("point","line")) +
@@ -305,11 +308,11 @@ impute.var <- function(df, var, formula, plots=F){
     )
 
     #Show the difference between the prediction (y.hat) and the real.
-    v <- !is.na(df[var]) & !is.na(y.hat)
+    v <- !is.na(df[var]) & !is.na(df[new.var])
     plot(
-      perf.plot(df[v,var], y.hat[v]) +
+      perf.plot(df[v,var], df[v, new.var]) +
         geom_abline(slope=1, linetype = "dashed") +
-        labs(title = "Imputed Error Plot", y = "Actual", x ="Expected")
+        labs(title = paste0("Error Plot - ", var), y = "Actual", x ="Expected")
     )
   }
 
