@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.tools.R
 \name{clip.tail}
 \alias{clip.tail}
-\title{Clip.Tail}
+\title{clip.tail}
 \usage{
 clip.tail(x, repl = 0)
 }
@@ -16,6 +16,6 @@ clip.tail(x, repl = 0)
 the vector is replace with NA
 }
 \description{
-Clip.Tail
+clip.tail
 }
 

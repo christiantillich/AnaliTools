@@ -6,6 +6,9 @@ Authors@R: person("Christian", "Tillich", role = c("aut", "cre"),
 		     email = "christian.tillich.walker@gmail.com")
 Depends:
    DBI
+  ,lazyeval
+  ,zoo
+  ,ezknitr
   ,gplots
   ,ggplot2
   ,ggthemes
