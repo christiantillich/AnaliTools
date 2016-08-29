@@ -304,62 +304,62 @@ clip.tail <- function(x, repl=0){
 
 
 #' impute.var
-#' @description Creates a quick linear model to impute null values based on 
-#' values in the data. Will only replace nulls, the predicted model values are
-#' discarded. 
-#' @param df The data frame. 
-#' @param var The name of the variable to impute null values for, as a string
-#' @param formula.x The formula for the imputation model 
-#' @param plots A variable to turn diagnostic plots on or off. 
 #'
-#' @return Returns the original data frame with a new variable labeled "imp_" + 
-#' var. Designed to put into magrittry chains easily. 
+#' @description Creates a quick linear model to impute null values based on
+#' values in the data. Will only replace nulls, the predicted model values are
+#' discarded.
+#' @param df The data frame.
+#' @param var The name of the variable to impute null values for, as a string
+#' @param formula.x The formula for the imputation model
+#' @param plots A variable to turn diagnostic plots on or off.
+#' @return Returns the original data frame with a new variable labeled "imp_" +
+#' var. Designed to put into magrittry chains easily.
 #' @export
-impute.var <- function(df, var, formula.x, plots=F){
-  
+impute.val <- function(df, var, formula.x, plots=F){
+
   library(lazyeval)
   library(zoo)
-  
-  #Create the model for imputation. 
+
+  #Create the model for imputation.
   mdl <- lm(paste(var,'~',formula.x),data = df)
-  
+
   #Create the imputed vector, add it to the data frame
-  #Doing it this way gets the na's right. 
+  #Doing it this way gets the na's right.
   y.hat <- predict(mdl, newdata=df)
   df[paste0('imp_',var)] <- ifelse(!is.na(df[[var]]), df[[var]], y.hat)
-  
-  #' If plots = true, plot a time series by month of the real variable 
+
+  #' If plots = true, plot a time series by month of the real variable
   #' superimposed over the imputation. Also maybe return the model summary?
   if(plots){
-    
+
     #Imputation model
     mdl %>% summary %>% coef %>% round(4) %>% data.frame.plot(halign="center")
     title("Imputation Model")
-    
+
     #Shows the time-series with the raw and imputed values
     plot(
       df %>%
         mutate(funding.mth = as.Date(as.yearmon(Funding.Date))) %>%
-        group_by(funding.mth) %>% 
-        summarise_( 
+        group_by(funding.mth) %>%
+        summarise_(
           raw = interp(~mean(val, na.rm = TRUE), val = as.name(var))
-          ,interp = 
+          ,interp =
             interp(~mean(val,na.rm= TRUE),val=as.name(paste0('imp_',var)))
           ,count = interp(~n())
-        ) %>% 
-        qplot(funding.mth, raw, data=., alpha=count, geom=c("point","line")) + 
-        geom_line(aes(y=interp),linetype="dashed", alpha=I(1)) + 
-        labs(title="Interpolated Values", y = var) + 
+        ) %>%
+        qplot(funding.mth, raw, data=., alpha=count, geom=c("point","line")) +
+        geom_line(aes(y=interp),linetype="dashed", alpha=I(1)) +
+        labs(title="Interpolated Values", y = var) +
         theme_BA()
     )
-    #Show the difference between the prediction (y.hat) and the real. 
+    #Show the difference between the prediction (y.hat) and the real.
     v <- !is.na(df[var]) & !is.na(y.hat)
     plot(
-      perf.plot(df[v,var], y.hat[v]) + 
+      perf.plot(df[v,var], y.hat[v]) +
         geom_abline(slope=1, linetype = "dashed") +
         labs(title = "Imputed Error Plot", y = "Actual", x ="Expected")
     )
   }
-  
+
   return(df)
 }
