@@ -4,10 +4,12 @@
 \alias{knitrdone}
 \title{Knitrdone}
 \usage{
-knitrdone(dir)
+knitrdone(dir, ...)
 }
 \arguments{
-\item{dir}{- The directory to write the output doc and all intermediaries to.}
+\item{dir}{The directory to write the output doc and all intermediaries to.}
+
+\item{...}{Additional parameters can be passed to ezknit.}
 }
 \value{
 Returns the .html and .md documents.
