@@ -359,3 +359,19 @@ clip.tail <- function(x, repl=0){
   return(x)
 }
 
+
+#' toss.tail
+#'
+#' @param x - a vector whose tail you'll be tossing.
+#' @param n - the number of observations to replace with null.
+#' @return - Returns a vector where the last n non-NA values are replaced with
+#' NA.
+#' @export
+toss.tail <- function(x, n){
+  pos <- max(which(!is.na(x)))
+  vals <- head(test, pos-n)
+  return(c(vals,rep(NA, length(x) - length(vals))))
+}
+
+
+
