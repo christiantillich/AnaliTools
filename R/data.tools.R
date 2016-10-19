@@ -369,7 +369,7 @@ clip.tail <- function(x, repl=0){
 #' @export
 toss.tail <- function(x, n){
   pos <- max(which(!is.na(x)))
-  vals <- head(test, pos-n)
+  vals <- head(x, pos-n)
   return(c(vals,rep(NA, length(x) - length(vals))))
 }
 
