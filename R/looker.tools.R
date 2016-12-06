@@ -54,3 +54,27 @@ looker.chunker <- function(
       write.csv(paste0(data.path, "/", file.name, "_", gsub("[/-]","_", dates[i]), ".csv"))
   }
 }
+
+
+
+
+#' clean_looker_colnames
+#' @description Transforms looker's standard formatting into a much more
+#' data-friendly snake case format. NOTE: The column names must already be
+#' formatted according to the URL formatting used to call the query. Looker3's
+#' pretty formatting will fail. To work around this, replace the column names
+#' with the vector you specified in the dictionary used to call the query.
+#' @param df The dataframe being altered.
+#' @return Returns the data frame with the new snake case column names.
+#' @export
+clean_looker_colnames <- function (df){
+
+  colnames(df)      <- gsub("^[^.]+\\.", "", colnames(df))
+  is_id_col         <- grepl('_id', colnames(df))
+  df[is_id_col]     <- lapply(df[is_id_col], function(x) as.integer(as.character(x)))
+  is_date_col       <- grepl('_date$', colnames(df))
+  df[is_date_col]   <- lapply(df[is_date_col], function(x) {as.Date(as.character(x), '%Y-%m-%d')})
+  # character_col     <- vapply(df, is.character, logical(1))
+  # df[character_col] <- lapply(df[character_col], as.factor)
+  df
+}
