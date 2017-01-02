@@ -111,6 +111,11 @@ s3list <- function(bucket, prefix="", lim=if(prefix==""){20}else{10000}){
 
   out <- system(s3.cmd,intern=T) %>% jsonlite::fromJSON(txt=.)
 
-  out$Contents
+  out$Contents %>%
+    mutate(
+       LastModified = as.Date(LastModified)
+      ,ETag = substr(ETag, nchar(ETag)-7, nchar(ETag)-1) %>% paste0('...',.)
+      ,Size = paste(round(Size / 100000,0), 'Mb')
+    ) %>% as.data.frame
 }
 
