@@ -4,10 +4,12 @@
 \alias{var.sum}
 \title{var.sum}
 \usage{
-var.sum(df)
+var.sum(df, exclude = "values")
 }
 \arguments{
 \item{df}{- A dataframe}
+
+\item{exclude}{-}
 }
 \value{
 A dataframe that summarizes the data, including total count, # nulls

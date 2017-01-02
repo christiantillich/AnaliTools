@@ -135,11 +135,12 @@ data.frame.compare <- function(df,df2,...){
 #' frame.That frame lists out the following features: total count, class,
 #' null count, unique count, and a character string of the first couple values
 #' @param df - A dataframe
+#' @param exclude - 
 #' @return A dataframe that summarizes the data, including total count, # nulls
 #' # uniques, variable class, and text showing some examples.
 #' @export
 #' @examples var.sum(iris)
-var.sum <- function(df){
+var.sum <- function(df, exclude='values'){
 
   #Give total count, null count, class, and unique count
   N <- sapply(df, length, USE.NAMES=F)
@@ -167,7 +168,8 @@ var.sum <- function(df){
   t$nulls <- as.integer(as.character(t$nulls))
   t$distinct <- as.integer(as.character(t$distinct))
   # print(table(t$type))
-  return(t)
+  
+  return(t[,del(t,exclude)])
 }
 
 
