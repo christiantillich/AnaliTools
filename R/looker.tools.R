@@ -78,3 +78,48 @@ clean_looker_colnames <- function (df){
   # df[character_col] <- lapply(df[character_col], as.factor)
   df
 }
+
+
+#' Convert a Looker url to a well-formed query for the API.
+#'
+#' @description - This is a straight-up rip-off of avant::looker_url_to_query. I'm
+#' adding it here because of issues I have with installing avant locally. Will
+#' remove as soon as local avant installs no longer become a problem.
+#' @param url character. The full URL copy pasted from the Looker view.
+#' @return a list of arguments to be passed to LookerQuery.
+#' @note a limit of 99999999 will always be added to the output since we almost always want all the data.
+#' @author RobK
+#' @examples /dontrun{
+#' stopifnot(identical(
+#'   looker_url_to_query("https://avantcredit.looker.com/explore/onyx/default_data?fields=default_data.loan_id,default_data.installment_id,default_data.installment_number,default_data.already_defaulted&f%5Bdefault_data.first_30_defaulted_installment%5D=Yes&limit=500&title=all+30+day+default+installments&look_id=63&show=data,fields&vis=%7B%22type%22:%22looker_column%22%7D&sorts=default_data.loan_id&filter_config=%7B%22default_data.first_30_defaulted_installment%22:%5B%7B%22type%22:%22is%22,%22values%22:%5B%7B%22constant%22:%22Yes%22%7D,%7B%7D%5D,%22id%22:0%7D%5D%7D"),
+#'   list("onyx", "default_data",
+#'      c("default_data.loan_id", "default_data.installment_number", "default_data.first_defaulted_installment"),
+#'      c("default_data.installment_number: 0 to 3"), limit = 99999999
+#'   )
+#' )}
+#' @export
+looker_url_to_query <- function(url) {
+  stopifnot(is.character(url))
+  parsed_url <- httr::parse_url(url)
+
+  # parsed_url$path looks like "explore/onyx/default_data"
+  path <- strsplit(parsed_url$path, "/")[[1]]
+  dictionary <- path[2]
+  look <- path[3]
+
+  query <- parsed_url$query
+
+  if (is.null(query$fields)) {
+    stop("No fields found. Did you 'Expand the URL' before copying it into R? \n",
+         "Try press the gear at the top-right and Share (or Cmd+U)")
+  }
+
+  fields <- strsplit(query$fields, ",")[[1]]
+
+  filters <- query[grepl('f[', names(query), fixed = TRUE)]
+  names(filters) <- gsub("^f\\[|\\]$", "", names(filters))
+  filters[] <- lapply(filters, chartr, old = '+', new = ' ')
+  filters <- paste(names(filters), unlist(filters), sep = ': ')
+
+  list(dictionary, look, fields, filters, limit = 99999999)
+}

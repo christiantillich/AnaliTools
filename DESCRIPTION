@@ -18,6 +18,7 @@ Depends:
   ,berdie
   ,scales
   ,jsonlite
+  ,httr
 Suggests:
 Description: My own personal toolbox. Use at your own discretion.
 License: GPL (>= 2)
