@@ -5,7 +5,7 @@
 #' @param filepath The remaining path to the file
 #' @return Returns the serialized R object.
 #' @export
-s3read <- function (bucket, filepath){
+s3.read <- function (bucket, filepath){
   #Check if your creds exist
 
   #Create a blank tempfile and directory for storage.
@@ -40,7 +40,7 @@ s3read <- function (bucket, filepath){
 #' @param filepath The full path where you'll store the file
 #' @return NULL
 #' @export
-s3write <- function(obj, bucket, filepath){
+s3.write <- function(obj, bucket, filepath){
 
   #Create a blank tempfile and directory for storage.
   x.serialized <- tempfile()
@@ -74,7 +74,7 @@ s3write <- function(obj, bucket, filepath){
 #' @return Returns a data frame listing the available s3 buckets and some
 #' attributes
 #' @export
-s3bucketlist <- function(){
+s3.bucketlist <- function(){
   out <- system('aws s3api list-buckets', intern=T) %>%
     paste(collapse='') %>%
     jsonlite::fromJSON(txt=.)
@@ -92,7 +92,7 @@ s3bucketlist <- function(){
 #' @export
 #'
 #' @examples
-s3list <- function(bucket, prefix="", lim=if(prefix==""){20}else{10000}){
+s3.list <- function(bucket, prefix="", lim=if(prefix==""){20}else{10000}){
 
   if(prefix == ""){
     s3.cmd <- paste(
