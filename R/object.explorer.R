@@ -27,5 +27,5 @@ name.search <- function(x, top=""){
 #' @return a single vector containing the value of the t
 #' @export
 look.for <- function(list.list, target){
-  sapply(list.list, function(x) x[[target]])
+  sapply(list.list, function(x) tryCatch(x[[target]], error=function(e) NA))
 }
