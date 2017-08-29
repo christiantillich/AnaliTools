@@ -30,14 +30,19 @@ del <- function(df, c) colnames(df[!colnames(df) %in% c])
 
 
 
-#' %||%
-#' @name %||%
-#' @description DataSci's coalesce function. Gives postgres-like coalesce
-#' @return equivalent to postgres coalesce(x,y)
+#' coalesce
+#' @description SQL-like coalesce
+#' @return SQL-like coalesce, e.g. coalesce(x,y)
 #' @rdname coalesce
 #' @export
-#' @examples NULL %||% 'a'
-`%||%` <- function(x, y) if (is.null(x) || is.na(x)) y else x
+#' @examples coalesce(x,y)
+coalesce <- function(...) {
+  Reduce(function(x, y) {
+    i <- which(is.na(x))
+    x[i] <- y[i]
+    x},
+    list(...))
+}
 
 
 
@@ -135,7 +140,7 @@ data.frame.compare <- function(df,df2,...){
 #' frame.That frame lists out the following features: total count, class,
 #' null count, unique count, and a character string of the first couple values
 #' @param df - A dataframe
-#' @param exclude - 
+#' @param exclude -
 #' @return A dataframe that summarizes the data, including total count, # nulls
 #' # uniques, variable class, and text showing some examples.
 #' @export
@@ -168,7 +173,7 @@ var.sum <- function(df, exclude='values'){
   t$nulls <- as.integer(as.character(t$nulls))
   t$distinct <- as.integer(as.character(t$distinct))
   # print(table(t$type))
-  
+
   return(t[,del(t,exclude)])
 }
 

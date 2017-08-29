@@ -7,6 +7,7 @@
 vec.text <- function(x) {
   x %>% 
     format(scientific = F) %>% 
+    trimws() %>%
     paste(collapse="','") %>% 
     paste("c('",.,"')",sep="")
 }

@@ -16,12 +16,13 @@ env.size <- function(env){
 #' @export
 env.list <- function(env){
   df <- ls(as.environment(env), all.names=T) %>% 
-    sapply(function(x) object.size(get(x, envir=as.environment(env)))) %>%
+    sapply(function(x) tryCatch(get(x, envir=as.environment(env)),error = function(e){NA})) %>%
+    sapply(function(x) tryCatch(object.size(x), error=function(e){0})) %>% 
     data.frame(attribute = names(.), size=.) %>%
     arrange(desc(size))
   
-  df$class <- ls(as.environment(env), all.names=T) %>% 
-    sapply(function(x) class(get(x, as.environment(env)))) %>%
+  df$class <- df$attribute %>% 
+    lapply(function(x) tryCatch(class(get(x, as.environment(env))), error=function(e){NA})) %>%
     sapply(function(x) paste(x,collapse=","))
   
   rownames(df) <- NULL
@@ -43,3 +44,17 @@ mem.size <- function(){
   rownames(df) <- NULL
   return(df)
 }
+
+#' mem.trace
+#' @description Trace the stack and see the memory size at each level. 
+#' @return A dataframe containing
+#' @export
+#'
+#' @examples
+# mem.trace <- function(){
+#     print(sapply(sys.frames(), env.size))
+#     data.frame(
+#        call = substr(as.character(unlist(sys.calls())), 1,30)
+#       ,size = sapply(sys.frames(), env.size)
+#     )
+# }
