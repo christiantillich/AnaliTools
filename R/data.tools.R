@@ -113,10 +113,6 @@ data.frame.compare <- function(df,df2,...){
   }
 
 
-
-
-
-
   #Are there any differing values for any of the entries
   df.fin[is.na(df.fin)] <- 'NA'
   v <- -c(recs.1,recs.2)
@@ -404,4 +400,33 @@ file.paths <- function(x) paste(x,list.files(x),sep="/")
 combine.csvs <- function(x) {
   csvs <- grep('\\.csv$',file.paths(x),value=TRUE)
   do.call(rbind,lapply(csvs, read.csv))
+}
+
+
+#' corr.plot
+#' @param df data.frame. A dataframe whose features you want to inspect the 
+#' correlations of. 
+#' @return A graph object from igraph::dataframe. Can be fed straight into plot.
+#' The plot pushes more heavily correlated variables closer to each other and
+#' less correlated variables further apart. Useful for evaluating potential
+#' factor structures in large data sets. 
+#' @export
+corr.plot <- function(df){
+  corrs <- df %>% 
+    cor(use = "pairwise.complete.obs") %>%
+    melt %>%
+    filter(abs(value) > 0.40) %>% 
+    mutate(
+       weight = value^2
+      ,type = factor(ifelse(value >= 0, 'pos','neg'))
+    )
+  
+  net <- graph_from_data_frame(
+      d = corrs
+    , vertices = unique(corrs$Var1)
+    , directed=FALSE
+  ) %>% simplify(remove.loops = TRUE)
+  
+  V(net)$size <- 1
+  net
 }

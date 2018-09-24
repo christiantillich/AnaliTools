@@ -18,6 +18,8 @@ Depends:
   ,scales
   ,jsonlite
   ,httr
+  ,igraph
+  ,reshape2
 Suggests:
 Description: My own personal toolbox. Use at your own discretion.
 License: GPL (>= 2)
