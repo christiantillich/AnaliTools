@@ -391,20 +391,17 @@ toss.tail <- function(x, n){
 file.paths <- function(x) paste(x,list.files(x),sep="/")
 
 
-#' get.files
+#' combine.data
 #' @description Takes an input file path, look for all .csv files, and then
 #' append each file in that path into a single data frame.
-#' @param x - a single path, expressed as a character string
+#' @param x - a path to a single directory, expressed as a character string
 #' @param match - A user-input regex to match to a subset of the filenames in a
 #' directory. Will only get files where grep(match)=T. The default value matches
 #' any .csv
 #' @return Function returns a single dataframe, which is the appended result
 #' of all .csv files at the path x.
 #' @export
-get.files <- function(x,match='\\.csv$') {
-  csvs <- grep(match,file.paths(x),value=TRUE)
+combine.csvs <- function(x) {
+  csvs <- grep('\\.csv$',file.paths(x),value=TRUE)
   do.call(rbind,lapply(csvs, read.csv))
 }
-
-
-
