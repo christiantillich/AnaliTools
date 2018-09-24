@@ -20,4 +20,3 @@ Remove named columns from df. SAS-like delete function.
 \examples{
 keep(iris, 'Sepal.Length')
 }
-

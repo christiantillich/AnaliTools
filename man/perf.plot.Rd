@@ -5,9 +5,10 @@
 \title{perf.plot}
 \usage{
 perf.plot(y, x, xlab = deparse(substitute(x)),
-  ylab = deparse(substitute(y)), main = paste(ylab, xlab, sep = " vs. "),
-  num.switch = class(x) \%in\% c("numeric", "integer", "float"),
-  col = "black", lwd = 450/length(.buckets(x, num.switch)$groups))
+  ylab = deparse(substitute(y)), main = paste(ylab, xlab, sep =
+  " vs. "), num.switch = class(x) \%in\% c("numeric", "integer",
+  "float"), col = "black", lwd = 450/length(.buckets(x,
+  num.switch)$groups))
 }
 \arguments{
 \item{y}{- The target variable}
@@ -44,4 +45,3 @@ perf.plot(as.integer(iris$Species == "virginica"),iris[,3])
 perf.plot(as.integer(iris$Species == "virginica"),iris[,1], num.switch=FALSE)
 perf.plot(as.integer(iris$Species == "virginica"),iris[,3], num.switch=FALSE)
 }
-

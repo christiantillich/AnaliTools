@@ -15,4 +15,3 @@ Function returns text that is formatted to snake case.
 \description{
 snake.case
 }
-

@@ -23,4 +23,3 @@ be readily joined with the original data frame using cbind. Be careful with
 this function at present, as you can easily flood memory by choosing
 columns with large numbers of unique values.
 }
-

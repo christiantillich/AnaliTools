@@ -20,4 +20,3 @@ exceed that limit.
 \description{
 An sapply wrapper for cap.
 }
-

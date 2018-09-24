@@ -18,4 +18,3 @@ Iterates through the list of attributes of an object. Unlike
 calling attributes, name.search works recursively. Really great for xml/html
 returns where you want to get a sense of the full hierarchy.
 }
-

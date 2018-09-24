@@ -4,9 +4,9 @@
 \alias{find.dates}
 \title{find.dates}
 \usage{
-find.dates(text, return.place = F, date.reg = "\\\\d+[/-]\\\\d+[/-]\\\\d+",
-  text.split = function(x) x \%>\% as.character \%>\% strsplit(" ") \%>\%
-  unlist)
+find.dates(text, return.place = F,
+  date.reg = "\\\\d+[/-]\\\\d+[/-]\\\\d+", text.split = function(x) x
+  \%>\% as.character \%>\% strsplit(" ") \%>\% unlist)
 }
 \arguments{
 \item{text}{- query as a single character string}
@@ -28,4 +28,3 @@ function returns a vector of the available dates in a query. If false,
 returns a vector of the logical position of dates in the vector created by
 query.split.
 }
-

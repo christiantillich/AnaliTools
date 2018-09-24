@@ -4,8 +4,8 @@
 \alias{data.frame.plot}
 \title{data.frame.plot}
 \usage{
-data.frame.plot(df, halign = "left", valign = "top", mar = c(0, 0, 3, 0),
-  cex = 0.75, cmar = 1, ...)
+data.frame.plot(df, halign = "left", valign = "top", mar = c(0, 0, 3,
+  0), cex = 0.75, cmar = 1, ...)
 }
 \arguments{
 \item{df}{- The data frame to plot}
@@ -17,4 +17,3 @@ Returns NULL, but prints an image object displaying the data frame.
 Just a wrapper for gplots::textplot, but with actually useful
 starting parameters. For parameters beyond df, see textplot.
 }
-

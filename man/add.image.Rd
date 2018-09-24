@@ -19,4 +19,3 @@ Returns null
 \description{
 - Adds a plot object to the FigR container.
 }
-

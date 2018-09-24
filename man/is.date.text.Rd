@@ -16,4 +16,3 @@ turned into a date.
 \description{
 is.date.text
 }
-

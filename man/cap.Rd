@@ -20,4 +20,3 @@ exceeds one of the bounds, cap returns the bound value instead.
 \description{
 Imposes lower and upper bounds on a value.
 }
-

@@ -20,4 +20,3 @@ batching more than one column with large numbers of unique entries.
 \examples{
 head(flg.create(iris, list("Species")))
 }
-

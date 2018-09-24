@@ -15,4 +15,3 @@ s3.write(obj, bucket, filepath)
 A windows-based s3write command. Designed to mimic the function
 of robertzk/s3mpi, but using windows system commands.
 }
-

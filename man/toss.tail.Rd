@@ -18,4 +18,3 @@ NA.
 \description{
 toss.tail
 }
-

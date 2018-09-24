@@ -33,4 +33,3 @@ stopifnot(identical(
 \author{
 RobK
 }
-

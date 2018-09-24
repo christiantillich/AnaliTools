@@ -19,4 +19,3 @@ formatted according to the URL formatting used to call the query. Looker3's
 pretty formatting will fail. To work around this, replace the column names
 with the vector you specified in the dictionary used to call the query.
 }
-

@@ -20,4 +20,3 @@ Basically df %>% select()
 \examples{
 keep(iris, 'Sepal.Length')
 }
-
