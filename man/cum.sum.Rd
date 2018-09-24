@@ -19,4 +19,3 @@ the values that are explicitly NA/Inf. The result noticeable graphically -
 Troublesome values are treated as missing, but the missing value itself
 does not cause a problem when computing the prior history.
 }
-

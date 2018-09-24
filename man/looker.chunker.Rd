@@ -28,4 +28,3 @@ portions, ideally to improve runtime. The looker dictionary must only have
 two date fields, and they must be sequentially ordered so start.date comes
 first.
 }
-

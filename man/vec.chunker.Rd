@@ -16,4 +16,3 @@ Returns a list
 Splits a vector into a list where each list element contains
 the next n values from the vector.
 }
-

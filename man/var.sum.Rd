@@ -23,4 +23,3 @@ null count, unique count, and a character string of the first couple values
 \examples{
 var.sum(iris)
 }
-

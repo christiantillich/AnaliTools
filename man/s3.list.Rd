@@ -4,8 +4,8 @@
 \alias{s3.list}
 \title{s3list}
 \usage{
-s3.list(bucket, prefix = "", lim = if (prefix == "") {     20 } else {    
-  10000 })
+s3.list(bucket, prefix = "", lim = if (prefix == "") {     20 } else { 
+     10000 })
 }
 \arguments{
 \item{bucket}{The bucket we'll be searching}
@@ -17,4 +17,3 @@ s3.list(bucket, prefix = "", lim = if (prefix == "") {     20 } else {
 \description{
 s3list
 }
-

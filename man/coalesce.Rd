@@ -15,4 +15,3 @@ SQL-like coalesce
 \examples{
 coalesce(x,y)
 }
-

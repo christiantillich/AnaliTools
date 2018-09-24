@@ -15,11 +15,10 @@ Depends:
   ,magrittr
   ,plyr
   ,dplyr
-  ,berdie
   ,scales
   ,jsonlite
   ,httr
 Suggests:
 Description: My own personal toolbox. Use at your own discretion.
 License: GPL (>= 2)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0

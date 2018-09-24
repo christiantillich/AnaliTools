@@ -22,4 +22,3 @@ Class constructor for image handling. FigR has a path value
 telling it where to print out, a method to add an image, a method to delete
 an image, and a method to print out all images to the path.
 }
-

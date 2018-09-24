@@ -18,4 +18,3 @@ qsave(filename, height = 6, width = 9, dpi = 600, ...)
 \description{
 Just a ggsave wrapper but with presaved settings
 }
-

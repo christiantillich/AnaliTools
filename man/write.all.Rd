@@ -16,4 +16,3 @@ Returns null
 - Takes the FigR object and writes out all elements in
 $images to the directory specified by $write.path.
 }
-

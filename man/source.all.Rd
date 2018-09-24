@@ -15,4 +15,3 @@ returns null
 \description{
 Why source one file when you can source a whole directory?
 }
-

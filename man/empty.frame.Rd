@@ -15,4 +15,3 @@ An empty data frame object with the specified column names
 \description{
 Create an empty data frame. Surprisingly tricky to do.
 }
-

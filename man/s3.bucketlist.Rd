@@ -13,4 +13,3 @@ attributes
 \description{
 Calls all of the available s3 buckets.
 }
-

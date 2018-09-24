@@ -18,4 +18,3 @@ the vector is replace with NA
 \description{
 clip.tail
 }
-

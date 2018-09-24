@@ -12,4 +12,3 @@ env.size(env)
 \description{
 Get the size of an environment by typing in its name as as string.
 }
-

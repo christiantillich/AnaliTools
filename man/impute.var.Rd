@@ -24,4 +24,3 @@ Creates a quick linear model to impute null values based on
 values in the data. Will only replace nulls, the predicted model values are
 discarded.
 }
-

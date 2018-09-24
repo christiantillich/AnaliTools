@@ -19,4 +19,3 @@ Looks for a single named attribute in a list of lists. Returns a
 vector containing every instance of that attribute. Pretty handy for playing
 with API call results.
 }
-

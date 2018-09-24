@@ -12,4 +12,3 @@ ggplot theme object, based off ggthemes::theme_gdocs()
 \description{
 Creates my go-to theme for the ggplot in analyses.
 }
-

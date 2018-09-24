@@ -23,4 +23,3 @@ Takes a vector of categorical values and collapses the vector
 into the first 'lim' unique values (by volume), and the rest are collapsed to
 an 'other' category.
 }
-

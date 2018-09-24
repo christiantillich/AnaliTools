@@ -22,4 +22,3 @@ Replaces query dates with a vector of dates specified by the
 user. Function will error if length(dates) is not the same as dates found by
 find.dates.
 }
-

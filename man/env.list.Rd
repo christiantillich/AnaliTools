@@ -12,4 +12,3 @@ env.list(env)
 \description{
 Get the size of all objects in an environment
 }
-

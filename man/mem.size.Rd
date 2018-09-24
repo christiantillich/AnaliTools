@@ -9,4 +9,3 @@ mem.size()
 \description{
 Get a list of all environments and their size in memory.
 }
-

@@ -21,4 +21,3 @@ environment varialbes. This wrapper just creates directories if none exist,
 and it can be placed at the beginning of a .RMD doc as the custom knit
 function.
 }
-

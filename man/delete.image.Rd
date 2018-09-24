@@ -17,4 +17,3 @@ Returns null
 \description{
 - Removes a plot object to the FigR container.
 }
-

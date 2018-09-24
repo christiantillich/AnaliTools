@@ -18,4 +18,3 @@ Returns the serialized R object.
 A windows-based s3read command. Designed to mimic the function
 of robertzk/s3mpi, but using windows system commands.
 }
-
