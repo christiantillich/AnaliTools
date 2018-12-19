@@ -29,7 +29,7 @@ library(magrittr)
     groups <- hist(x, plot=F)$breaks
 
     #Use the cute sapply stuff to do the lookup.
-    buckets <- sapply(x, function(a) groups[which.min(abs(groups - a))])
+    buckets <- sapply(x, function(a) groups[which.min(abs(groups - a))]) %>% as.numeric
 
   }else{
   #If the variable is non-numeric, or the switch has been thrown.
