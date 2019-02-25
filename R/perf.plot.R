@@ -64,7 +64,14 @@ library(magrittr)
 
 
 
-
+#' perf.plot
+#' @description Creates a table for a common univariate analysis - the target variable
+#' averaged at different levels of x. Table returns mean values and counts at the
+#' different levels of x, where the levels are determined by using hist()$breaks.
+#' @param y - The target variable
+#' @param x - The independent variable.
+#' @return Returns a dataframe with the mean value of y at bucketed values of x. 
+#' @export
 perf.table <- function(y, x,
   num.switch = class(x) %in% c("numeric", "integer", "float")
 ){
