@@ -65,6 +65,34 @@ library(magrittr)
 
 
 #' perf.plot
+#' @description Creates a table for a common univariate analysis - the target variable
+#' averaged at different levels of x. Table returns mean values and counts at the
+#' different levels of x, where the levels are determined by using hist()$breaks.
+#' @param y - The target variable
+#' @param x - The independent variable.
+#' @return Returns a dataframe with the mean value of y at bucketed values of x. 
+#' @export
+perf.table <- function(y, x,
+  num.switch = class(x) %in% c("numeric", "integer", "float")
+){
+  #Makes the x-axis groupings for the variable.
+  groups <- .buckets(x, num.switch)$groups
+  buckets <- .buckets(x, num.switch)$buckets
+  if(num.switch){buckets %<>% as.numeric}
+
+
+  #This is the main data manipulation step. Gets summary stats by bucket.
+  data.frame(x, buckets, y) %>%
+    group_by(buckets) %>%
+    summarise(count = n(), avg = mean(y, na.rm=T)) %>%
+    merge(as.data.frame(groups), by.x="buckets", by.y="groups", all.y=T) %>%
+    mutate(
+       count = replace(count, is.na(count), 0)
+      ,avg = replace(avg, is.na(avg), 0)
+      )
+}
+
+#' perf.plot
 #' @description Creates my most common univariate plot - the target variable
 #' averaged at different levels of x and superimposed over a histogram showing
 #' the population distribution across the different values of x. The returned
@@ -95,36 +123,8 @@ perf.plot <- function(y, x
   ,lwd = 450/length(.buckets(x, num.switch)$groups)
   ){
 
-  #Makes the x-axis groupings for the variable.
-  groups <- .buckets(x, num.switch)$groups
-  buckets <- .buckets(x, num.switch)$buckets
-
-
   #This is the main data manipulation step. Gets summary stats by bucket.
-  t <- data.frame(x, buckets, y) %>%
-    group_by(buckets) %>%
-    summarise(count = n(), avg = mean(y, na.rm=T)) %>%
-    merge(as.data.frame(groups), by.x="buckets", by.y="groups", all.y=T) %>%
-    mutate(
-       count = replace(count, is.na(count), 0)
-      ,avg = replace(avg, is.na(avg), 0)
-      )
-
-  #Plot the data from the modified summary data frame
-  #   plot(t$count
-  #     ,type='h'
-  #     ,lwd = lwd,
-  #     ,lend='square', col='grey'
-  #     ,xaxt='n', yaxt='n', ylab='', xlab=''
-  #     )
-  #   axis(side=1, labels=t$buckets, at=1:nrow(t), las=2)
-  #   axis(side=4, at=pretty(t$count), labels=T)
-  #   par(new=TRUE)
-  #   plot(t$avg,
-  #      type = 'b', col=col,
-  #      xaxt='n',xlab = xlab, ylab = ylab,
-  #      main = main
-  #     )
+  t <- perf.table(y, x, num.switch)
 
   ggplot(
     data = t, mapping = aes(
